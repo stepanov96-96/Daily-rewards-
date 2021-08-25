@@ -55,8 +55,8 @@ public class DailyReward : MonoBehaviour
 
     private bool canClaimReward; // можем ли мы сейчас забрать награду или нет
     private int maxStreakCount=8; // общее количество дней за которую пологается награда
-    private float claimCoolDown = 24f; //через сколько нужно забрать награду
-    private float claimDeadLine = 48f; //в часах за какой промежуток нужно забрать награду
+    private float claimCoolDown = 24f / 24 / 60 / 6 / 2; //через сколько нужно забрать награду 
+    private float claimDeadLine = 48f / 24 / 60 / 6 / 2; //в часах за какой промежуток нужно забрать награду 
 
     private List<RewardPref> rewardPrefabs;
 
@@ -147,6 +147,8 @@ public class DailyReward : MonoBehaviour
                 GameControl.Instance.AddCabolls(reward.Value);
                 break;
         }
+
+        ClaimRewardPanel.Instance.Show(reward);
 
         lastClaimTime = DateTime.UtcNow;
         currentStreak = (currentStreak + 1) % maxStreakCount;
